@@ -20,5 +20,11 @@
   <%= @thing.solution_description %>
 </p>
 
+<p>
+  <strong>Tags:</strong>
+  <%= @thing.tag_list %>
+</p>
+
+
 <%= link_to 'Edit', edit_thing_path(@thing) %> |
 <%= link_to 'Back', things_path %>

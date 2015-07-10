@@ -86,6 +86,6 @@ class ThingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def thing_params
-      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description)
+      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list)
     end
 end
