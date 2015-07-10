@@ -8,6 +8,10 @@ class Admin::UsersController < Admin::BaseController
   ]
 
 
+  
+  
+  #generated stuff
+
   def index
     @users = User.search_and_order(params[:search], params[:page])
   end

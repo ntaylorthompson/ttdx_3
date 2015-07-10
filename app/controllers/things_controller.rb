@@ -1,6 +1,17 @@
 class ThingsController < ApplicationController
   before_action :set_thing, only: [:show, :edit, :update, :destroy]
 
+
+
+
+  #stuff taylor added
+  def current_user_index
+    @things = current_user.things
+  end
+  
+  
+  #generated stuff
+  
   # GET /things
   # GET /things.json
   def index

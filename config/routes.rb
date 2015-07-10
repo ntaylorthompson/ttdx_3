@@ -39,6 +39,8 @@ Ttdx3::Application.routes.draw do
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
   
+  get "current_user_things", to: "things#current_user_index", as: "current_user_things"
+  
   
   devise_for :users
 
