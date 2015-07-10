@@ -24,6 +24,9 @@
 #
 
 class User < ActiveRecord::Base
+  #custom edits to model
+  has_many :things
+  
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

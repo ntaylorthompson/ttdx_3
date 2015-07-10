@@ -24,7 +24,7 @@ class ThingsController < ApplicationController
   # POST /things
   # POST /things.json
   def create
-    @thing = Thing.new(thing_params)
+    @thing = current_user.things.build(thing_params)
 
     respond_to do |format|
       if @thing.save
@@ -36,6 +36,12 @@ class ThingsController < ApplicationController
       end
     end
   end
+
+
+
+
+
+
 
   # PATCH/PUT /things/1
   # PATCH/PUT /things/1.json
