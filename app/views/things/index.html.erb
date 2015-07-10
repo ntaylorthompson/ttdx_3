@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Things</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Object description</th>
+      <th>Problem description</th>
+      <th>Solution description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @things.each do |thing| %>
+      <tr>
+        <td><%= thing.user %></td>
+        <td><%= thing.object_description %></td>
+        <td><%= thing.problem_description %></td>
+        <td><%= thing.solution_description %></td>
+        <td><%= link_to 'Show', thing %></td>
+        <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
+        <td><%= link_to 'Destroy', thing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Thing', new_thing_path %>
