@@ -4,9 +4,13 @@ class ThingsController < ApplicationController
 
 
 
-  #stuff taylor added
+#stuff taylor added
+
+#not sure if I should adjust the current user index to use tags?
   def current_user_index
     @things = current_user.things
+    
+    
   end
   
   
@@ -15,7 +19,12 @@ class ThingsController < ApplicationController
   # GET /things
   # GET /things.json
   def index
-    @things = Thing.all
+
+    if params[:tag]
+      @things = Thing.tagged_with(params[:tag])
+    else
+      @things = Thing.all
+    end
   end
 
   # GET /things/1

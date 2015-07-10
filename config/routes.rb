@@ -34,7 +34,11 @@
 #
 
 Ttdx3::Application.routes.draw do
+  get 'tags/:tag', to: 'things#index', as: :tag
   resources :things
+  
+
+  
   root "pages#home"
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"

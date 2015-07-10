@@ -27,14 +27,15 @@
 		  
 <li><%= link_to "new thing", new_thing_path %></li>  
 <li><%= link_to "your things", current_user_things_path %></li>
-<li><%= link_to "browse things", things_path %></li>
+<li><%= link_to "all things", things_path %></li>
 <li><%= link_to "notifs", inside_path %></li>
-<li><%= link_to "account", edit_user_registration_path %></li>
-
-
 <% if current_user.admin? %>
 <li><%= link_to "admin", admin_root_path %></li>
 <% end %>
+<li><%= link_to "account", edit_user_registration_path %></li>
+
+
+
 
 
 

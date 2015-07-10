@@ -18,7 +18,10 @@
         <td><%= thing.object_description %></td>
         <td><%= thing.problem_description %></td>
         <td><%= thing.solution_description %></td>
-		<td><%= thing.tag_list %></td>
+		<td><%= raw thing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+
+
+		
         <td><%= link_to 'Show', thing %></td>
         <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
 

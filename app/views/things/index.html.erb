@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
-
-<h1>All Things</h1>
-
+<% if params[:tag] %>
+	<h1> Things
+  	<small>tagged '<%= params[:tag] %>' </small></h1>
+	<%else%>
+	<h1>All Things</h1>
+	
+<%end%>
 <%= render 'index' %>
