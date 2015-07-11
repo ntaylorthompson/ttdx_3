@@ -9,9 +9,8 @@
       </tr>
     </thead>
 
-    <tbody>
-<%= form_for(@solution1) do |f| %>
-<% @solution = @solution1%>
+
+<%= form_for(@solution) do |f| %>
   <% if @solution.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@solution.errors.count, "error") %> prohibited this solution from being saved:</h2>
@@ -24,29 +23,14 @@
     </div>
   <% end %>
 
-
+    <tbody>
         <tr>
           <td>    <%= f.text_field :kind %></td>
           <td>    <%= f.text_area :description %></td>
           <td>    <%= f.text_area :issues_description %></td>
+
         </tr>
 
-<%= form_for(@solution2) do |f| %>
-
-        <tr>
-          <td>    <%= f.text_field :kind %></td>
-          <td>    <%= f.text_area :description %></td>
-          <td>    <%= f.text_area :issues_description %></td>
-        </tr>
-		
-<%= form_for(@solution3) do |f| %>
-
-        <tr>
-          <td>    <%= f.text_field :kind %></td>
-          <td>    <%= f.text_area :description %></td>
-          <td>    <%= f.text_area :issues_description %></td>
-        </tr>		
-		
 	  
     </tbody>
   </table>
@@ -54,6 +38,4 @@
     <%= f.submit %>
   </div>
   
-<% end %>
-<% end %>
 <% end %>
