@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @solution.kind %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @solution.description %>
+</p>
+
+<p>
+  <strong>Issues description:</strong>
+  <%= @solution.issues_description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @solution.user_id %>
+</p>
+
+<p>
+  <strong>Thing:</strong>
+  <%= @solution.thing_id %>
+</p>
+
+<%= link_to 'Edit', edit_solution_path(@solution) %> |
+<%= link_to 'Back', solutions_path %>
