@@ -32,7 +32,9 @@ class ThingsController < ApplicationController
   # GET /things/new
   def new
     @thing = Thing.new
-    @solution = Solution.new
+    @solution1 = Solution.new
+    @solution2 = Solution.new 
+    @solution3 = Solution.new
   end
 
   # GET /things/1/edit
