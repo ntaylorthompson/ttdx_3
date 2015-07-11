@@ -1,13 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @thing.user.email %>
-</p>
+<h1>Thing to:<small> </h1><h1><%= @thing.object_description %></small></h1>
+<br	>
 
 <p>
-  <strong>Thing to:</strong>
-  <%= @thing.object_description %>
+  <strong>By user:</strong>
+  <%= @thing.user.email %>
 </p>
 
 <p>
@@ -20,10 +18,18 @@
   <%= @thing.solution_description %>
 </p>
 
+
+<br>
+<h3>Possible solutions:</h3>
+
+  <%= render 'show_solution' %>
+
+<br>
 <p>
   <strong>Tags:</strong>
   <%= raw @thing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
 </p>
+
 
 
 <%= link_to 'Edit', edit_thing_path(@thing) %> |

@@ -27,6 +27,7 @@ class ThingsController < ApplicationController
   # GET /things/1
   # GET /things/1.json
   def show
+    @solution = @thing.solutions.first
   end
 
   # GET /things/new
