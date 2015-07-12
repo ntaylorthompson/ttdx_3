@@ -1,18 +1,6 @@
 class ThingsController < ApplicationController
   before_action :set_thing, only: [:show, :edit, :update, :destroy]
-
-
-
-
-#stuff taylor added
-
-#not sure if I should adjust the current user index to use tags?
-  def current_user_index
-    @things = current_user.things    
-  end
   
-  
-  #generated stuff
   
   # GET /things
   # GET /things.json
@@ -23,49 +11,76 @@ class ThingsController < ApplicationController
       @things = Thing.all
     end
   end
-
+  
+  def current_user_index
+    @things = current_user.things    
+  end
   # GET /things/1
   # GET /things/1.json
+
+
+  #NEEDSTO BE FIXED 
   def show
-    @solution = @thing.solutions.first
+    #ALREADY HAS @THING AUTOMATICALLY, SO MAYBE NEXT LINE IS UNNECESSARY?
+#    @solution = @thing.solutions.first
   end
 
   # GET /things/new
   def new
     @thing = Thing.new
-    @solution = Solution.new
+    1.times {@thing.solutions.build}
   end
 
-  # GET /things/1/edit
-  
-  def edit
-    @solution = Thing.find(params[:id]).solutions.first
-  end
+
 
   # POST /things
   # POST /things.json
   def create
     @thing = current_user.things.build(thing_params)
-    @solution = @thing.solutions.build(solution_params)
-    
-    respond_to do |format|
+#    @thing.solutions.build(solution_params)
+#    @solutions = @thing.solutions
+        
+    if params[:add_solution]
+      @thing = current_user.things.build(thing_params)
+      @thing.solutions.build
+      render :new
+      return
+    end
+ #     new_sol = Solution.new
+  #    @thing.solutions.build
+   #   @solutions = @thing.solutions
+#    else
+#    respond_to do |format|
       if @thing.save
-        format.html { redirect_to @thing, notice: 'Thing was successfully created.' }
-        format.json { render :show, status: :created, location: @thing }
+        flash[:notice] = "Successfully created thing."
+        redirect_to @thing and return
       else
         format.html { render :new }
         format.json { render json: @thing.errors, status: :unprocessable_entity }
       end
-      if @solution.save
-        format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
-        format.json { render :show, status: :created, location: @solution }
-      else
-        format.html { render :new }
-        format.json { render json: @solution.errors, status: :unprocessable_entity }
-      end
-    end
+ #     if @solution.save
+  #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
+   #     format.json { render :show, status: :created, location: @solution }
+   #   else
+    #    format.html { render :new }
+     #   format.json { render json: @solution.errors, status: :unprocessable_entity }
+     # end
+     # => @thing.save
+#     @thing.save    
+ #    render :edit
+
+   end
   end
 
+
+
+  
+
+
+
+  # GET /things/1/edit  
+  def edit
+  end
 
   # PATCH/PUT /things/1
   # PATCH/PUT /things/1.json
@@ -106,9 +121,10 @@ class ThingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def thing_params
-      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list)
+      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list,  solutions_attributes: [:id, :kind, :description, :issues_description ])
+#      params.require(:solution).permit(:kind, :description, :issues_description)
     end
     def solution_params
-      params.require(:solution).permit(:kind, :description, :issues_description)
+      params.require(:solution).permit(:id, :kind, :description, :issues_description)
     end
-end
+

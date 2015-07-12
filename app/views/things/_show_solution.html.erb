@@ -14,12 +14,14 @@
 
 
     <tbody>
+		<%for solution in @thing.solutions %>
         <tr>
-          <td><%= @solution.thing.user.email %>   </td>
-          <td><%= @solution.kind %>     </td>
-          <td><%= @solution.description %>    </td>
-          <td><%= @solution.issues_description %>   </td>		  		  
+          <td><%= solution.thing.user.email %>   </td>
+          <td><%= solution.kind %>     </td>
+          <td><%= solution.description %>    </td>
+          <td><%= solution.issues_description %>   </td>		  		  
         </tr>
+		<%end%>
     </tbody>
   </table>
 

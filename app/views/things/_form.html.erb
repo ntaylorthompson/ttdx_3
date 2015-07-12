@@ -1,4 +1,5 @@
-<%= form_for(@thing) do |f| %>
+<%= form_for @thing do |f| %>
+
   <% if @thing.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@thing.errors.count, "error") %> prohibited this thing from being saved:</h2>
@@ -32,8 +33,37 @@
   </div>
   <br>
   
-  <%= render 'form_solution' %>
-  
 
+<table class="table table-striped">
+	<thead>
+    <tr>
+		<th>Existing solution:</th>
+        <th>Description:</th>
+        <th>Problems with this solution:</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+	<tbody>
+	
+
+	<%= f.fields_for :solutions do |sol| %>
+		<tr>
+			<td>    <%= sol.text_field :kind %></td>
+		    <td>    <%= sol.text_area :description %></td>
+		    <td>    <%= sol.text_area :issues_description %></td>
+
+		</tr>
+	<%end%>
+</tbody>  
+  </table>
+  <div class="actions">
+  </div>
+
+
+  
+  <%= f.submit 'Add solution', :name => "add_solution" %>  
+  <br>  <br>
+  <%= f.submit %>
 
 <% end %>
