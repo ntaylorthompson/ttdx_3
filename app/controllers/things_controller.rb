@@ -70,7 +70,7 @@ class ThingsController < ApplicationController
  #    render :edit
 
    end
-  end
+  #end
 
 
 
@@ -85,6 +85,12 @@ class ThingsController < ApplicationController
   # PATCH/PUT /things/1
   # PATCH/PUT /things/1.json
   def update
+    if params[:add_solution]
+      @thing = Thing.find(params[:id])
+      @thing.solutions.build
+      render :edit
+      return
+    end
     respond_to do |format|
       if @thing.update(thing_params)
         format.html { redirect_to @thing, notice: 'Thing was successfully updated.' }
@@ -93,13 +99,7 @@ class ThingsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @thing.errors, status: :unprocessable_entity }
       end
-      if Thing.find(params[:id]).solutions.first.update(solution_params)
-        format.html { redirect_to @solution, notice: 'Thing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @solution }
-      else
-        format.html { render :edit }
-        format.json { render json: @solution.errors, status: :unprocessable_entity }
-      end
+
     end
   end
 
@@ -128,3 +128,4 @@ class ThingsController < ApplicationController
       params.require(:solution).permit(:id, :kind, :description, :issues_description)
     end
 
+  end
