@@ -26,6 +26,7 @@
 class User < ActiveRecord::Base
   #custom edits to model
   has_many :things
+  has_many :comments  
   
   
   # Include default devise modules. Others available are:

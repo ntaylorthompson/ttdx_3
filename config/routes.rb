@@ -37,6 +37,7 @@ Ttdx3::Application.routes.draw do
   resources :solutions
   get 'tags/:tag', to: 'things#index', as: :tag
   resources :things
+  resources :comments
   
 
   

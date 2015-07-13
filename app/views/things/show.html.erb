@@ -34,3 +34,10 @@
 
 <%= link_to 'Edit', edit_thing_path(@thing) %> |
 <%= link_to 'Back', things_path %>
+
+<br>
+<%= render 'form_comment' %>	
+
+<ol class="microposts">
+  <%= render @comments %>
+</ol>

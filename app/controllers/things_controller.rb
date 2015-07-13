@@ -6,9 +6,9 @@ class ThingsController < ApplicationController
   # GET /things.json
   def index
     if params[:tag]
-      @things = Thing.tagged_with(params[:tag]).order('updated_at DESC')
+      @things = Thing.tagged_with(params[:tag])
     else
-      @things = Thing.all.order('updated_at DESC')
+      @things = Thing.all
     end
     @followed_things_ids = current_user.followed_things.map(&:to_i)
 
@@ -16,7 +16,7 @@ class ThingsController < ApplicationController
   end
   
   def index_current_user
-    @things = current_user.things.order('updated_at DESC')
+    @things = current_user.things
     ft = current_user.followed_things
     ft = Thing.find(ft)
     @followed_things = ft
@@ -53,8 +53,9 @@ class ThingsController < ApplicationController
 
   #NEEDSTO BE FIXED 
   def show
-    #ALREADY HAS @THING AUTOMATICALLY, SO MAYBE NEXT LINE IS UNNECESSARY?
-#    @solution = @thing.solutions.first
+    @comments = @thing.comments
+    @comment = @thing.comments.build
+    @comment.user = current_user
   end
 
   # GET /things/new
@@ -143,6 +144,7 @@ class ThingsController < ApplicationController
   # DELETE /things/1
   # DELETE /things/1.json
   def destroy
+    require_admin! #FOR NOW, DON'T WANT PEOPLE TO DESTROY THINGS
     @thing.destroy
     respond_to do |format|
       format.html { redirect_to things_url, notice: 'Thing was successfully destroyed.' }
