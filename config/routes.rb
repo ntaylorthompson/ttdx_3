@@ -45,7 +45,8 @@ Ttdx3::Application.routes.draw do
   get "inside", to: "pages#inside", as: "inside"
 
   get "follow", to: "things#follow", as: "follow"
-  
+  get "unfollow", to: "things#unfollow", as: "unfollow"
+    
   get "current_user_things", to: "things#index_current_user", as: "current_user_things"
   
   

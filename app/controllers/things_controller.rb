@@ -10,11 +10,17 @@ class ThingsController < ApplicationController
     else
       @things = Thing.all.order('updated_at DESC')
     end
+    @followed_things_ids = current_user.followed_things.map(&:to_i)
+
+    
   end
   
   def index_current_user
     @things = current_user.things.order('updated_at DESC')
-    @followed_things = current_user.followed_things
+    ft = current_user.followed_things
+    ft = Thing.find(ft)
+    @followed_things = ft
+    @followed = false
     
   end
   # GET /things/1
@@ -34,6 +40,16 @@ class ThingsController < ApplicationController
     current_user.save
     redirect_to things_path    
   end
+  
+  def unfollow
+    id_s = params[:format]
+    id = id_s.to_i
+    current_user.followed_things_will_change!
+    current_user.followed_things.delete(id_s)
+    current_user.save
+    redirect_to things_path    
+  end
+    
 
   #NEEDSTO BE FIXED 
   def show

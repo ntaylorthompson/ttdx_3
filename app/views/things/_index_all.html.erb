@@ -28,7 +28,13 @@
 		
 
         <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
-        <td><%= link_to 'Follow', follow_path(thing) %></td>
+		
+		<% unless @followed_things_ids.include? thing.id %>
+        	<td><%= link_to 'Follow', follow_path(thing) %></td>
+		<%else %>
+			<td><%= link_to 'Unfollow', unfollow_path(thing) %></td>
+		<%end%>
+		
 		
       </tr>
     <% end %>

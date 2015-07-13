@@ -28,7 +28,10 @@
 		
 
         <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
-        <td><%= link_to 'Show', thing %></td>
+
+		<% if @followed == true %>
+			<td><%= link_to 'Unfollow', unfollow_path(thing) %></td>
+		<%end%>
 		
       </tr>
     <% end %>
