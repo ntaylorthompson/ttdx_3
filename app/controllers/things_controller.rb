@@ -47,7 +47,7 @@ class ThingsController < ApplicationController
     current_user.followed_things_will_change!
     current_user.followed_things.delete(id_s)
     current_user.save
-    redirect_to things_path    
+    redirect_to(:back)    
   end
     
 

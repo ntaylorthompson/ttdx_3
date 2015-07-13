@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment[:user_id] = @thing.user_id
     
     if @comment.save
-      flash[:success] = "Comment created!"
+      flash[:notice] = "Comment created!"
       redirect_to @thing
     else
       flash[:alert] = "Comment not created!"
