@@ -6,18 +6,28 @@ class ThingsController < ApplicationController
   # GET /things.json
   def index
     if params[:tag]
-      @things = Thing.tagged_with(params[:tag])
+      @things = Thing.tagged_with(params[:tag]).order('updated_at DESC')
     else
-      @things = Thing.all
+      @things = Thing.all.order('updated_at DESC')
     end
   end
   
-  def current_user_index
-    @things = current_user.things    
+  def index_current_user
+    @things = current_user.things.order('updated_at DESC')
   end
   # GET /things/1
   # GET /things/1.json
 
+  def follow
+    id = params[:format].to_i
+    if current_user.followed_things.nil? 
+      current_user.update_attribute(:followed_things, [id])
+    else
+      current_user.followed_things << id
+      current_user.followed_things.save
+    end
+    redirect_to things_path    
+  end
 
   #NEEDSTO BE FIXED 
   def show

@@ -1,0 +1,39 @@
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+
+      <th>Thing to:</th>
+      <th>Tags:	</th>
+      <th>By:	</th>
+      <th>Problem:</th>
+      <th>Solution:	</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @things.each do |thing| %>
+      <tr>
+
+        <td><%= link_to thing.object_description, thing %></td>
+		<td><%= raw thing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+        <td><%= thing.user.email %></td>
+        <td><%= thing.problem_description %></td>
+        <td><%= thing.solution_description %></td>
+
+
+
+		
+        <td><%= link_to 'Show', thing %></td>
+        <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Thing', new_thing_path %>
