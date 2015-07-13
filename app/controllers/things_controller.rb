@@ -112,6 +112,11 @@ class ThingsController < ApplicationController
 
   # GET /things/1/edit  
   def edit
+    unless current_user.id == Thing.find(params[:id]).user_id
+      flash[:alert] = "You can only edit your own things!"
+      redirect_to(:back) and return 
+    end
+    
   end
 
   # PATCH/PUT /things/1
