@@ -26,9 +26,10 @@
 
 
 		
-        <td><%= link_to 'Show', thing %></td>
-        <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
 
+        <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
+        <td><%= link_to 'Follow', follow_path(thing) %></td>
+		
       </tr>
     <% end %>
   </tbody>

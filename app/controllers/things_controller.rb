@@ -14,18 +14,24 @@ class ThingsController < ApplicationController
   
   def index_current_user
     @things = current_user.things.order('updated_at DESC')
+    @followed_things = current_user.followed_things
+    
   end
   # GET /things/1
   # GET /things/1.json
 
   def follow
-    id = params[:format].to_i
+    id_s = params[:format]
+    id = id_s.to_i
+    current_user.followed_things_will_change!
     if current_user.followed_things.nil? 
       current_user.update_attribute(:followed_things, [id])
     else
-      current_user.followed_things << id
-      current_user.followed_things.save
+      unless current_user.followed_things.include? id_s
+        current_user.update_attributes(followed_things: current_user.followed_things.push(id))
+      end
     end
+    current_user.save
     redirect_to things_path    
   end
 

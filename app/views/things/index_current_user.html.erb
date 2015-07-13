@@ -2,4 +2,12 @@
 
 <h1>Your Things</h1>
 
+<h1><small>Created:</small></h1>
 <%= render 'index_current_user' %>
+
+<%@things = @followed_things%>
+
+<h1><small>Followed:</small></h1>
+<%= render 'index_current_user' %>
+
+<%= link_to 'New Thing', new_thing_path %>
