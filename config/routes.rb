@@ -34,11 +34,13 @@
 #
 
 Ttdx3::Application.routes.draw do
+  get 'activities/index'
+
   resources :solutions
   get 'tags/:tag', to: 'things#index', as: :tag
   resources :things
   resources :comments
-  
+  resources :activities
 
   
   root "pages#home"

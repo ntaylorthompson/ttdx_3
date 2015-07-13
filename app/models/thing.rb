@@ -1,4 +1,7 @@
 class Thing < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+  
   has_many :solutions
   has_many :comments
   accepts_nested_attributes_for :solutions

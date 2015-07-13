@@ -1,0 +1,7 @@
+<h1>Activities</h1>
+<% @activities.each do |activity| %>
+  <%= User.find(activity.owner_id).email %> 
+ <%= activity.key %>   
+ <%= activity.created_at %>   
+  <br><br>
+<% end %>

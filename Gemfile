@@ -13,6 +13,7 @@ gem 'bcrypt', '3.1.10'
 
 #taylor added
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'public_activity'
 
 # Necessary for Windows OS (won't install on *nix systems)
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
