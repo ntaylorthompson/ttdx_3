@@ -59,7 +59,10 @@ class ThingsController < ApplicationController
   #NEEDSTO BE FIXED 
   def show
     @comments = @thing.comments
-    @comment = @thing.comments.build
+
+    #ugh: needed to create a new comment without adding new comment to the list at bottom of thing view
+    @comment = Comment.new
+    @comment.thing_id = @thing.id
     @comment.user = current_user
   end
 

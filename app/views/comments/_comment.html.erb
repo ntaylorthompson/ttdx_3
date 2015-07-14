@@ -4,5 +4,5 @@
   <span class="content"><%= comment.user.username %></span>
   <span class="content"><%= comment.description %></span>
   <span class="content"><%= comment.content %></span>
-
+  <span class="content"><i><%= time_ago_in_words(comment.created_at)  %> ago </i></span>	
 </li>
