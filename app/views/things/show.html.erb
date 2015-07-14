@@ -1,6 +1,13 @@
-<h1>Thing to:<small>	<%= @thing.object_description %></small></h1>
-<br	>
-
+<div class="row">
+	<div class="col-lg-8">
+		<h1>Thing to:<small>	<%= @thing.object_description %></small></h1>
+	</div>
+	<% if @thing.user == current_user %>
+	<div class="col-lg-4 text-right">
+		<%= button_to 'Edit thing', edit_thing_path(@thing) %>
+	</div>
+	<%end%>
+</div>
 <p>
   <strong>By user:</strong>
   <%= @thing.user.username %>
@@ -16,30 +23,34 @@
   <%= @thing.solution_description %>
 </p>
 
-
-<br>
-<h3>Solutions:</h3>
-
-  <%= render 'show_solution' %>
-
-<br>
 <p>
   <strong>Tags:</strong>
   <%= raw @thing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
 </p>
 
+<br>
+
+<h3>Solutions:</h3>
+
+  <%= render 'show_solution' %>
+
+<br>
 
 
-<%= link_to 'Edit', edit_thing_path(@thing) %> |
-<%= link_to 'Back', things_path %>
-
-
-<hr>
-
+<h3>Comments:</h3>
 
 <%= render 'form_comment' %>	
 
-<h1><small>Comment</small></h1>
-<ol>
+<br>
+
+<%if @thing.comments.empty? == false%>
+	<h1><small>
+		<%="Comment".pluralize(@thing.comments.count)%>
+	</small></h1>
+<%end%>
+
+<table class="table">
+
   <%= render @comments %>
-</ol>
+
+</table>

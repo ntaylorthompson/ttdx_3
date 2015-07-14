@@ -1,8 +1,11 @@
-
-
-<li id="comment-<%= comment.id %>">
-  <span class="content"><%= comment.user.username %></span>
-  <span class="content"><%= comment.description %></span>
-  <span class="content"><%= comment.content %></span>
-  <span class="content"><i><%= time_ago_in_words(comment.created_at)  %> ago </i></span>	
+<tbody>
+<tr>
+  
+  
+  <td><%= comment.user.username %></td>
+  <td><%= comment.content %></td>
+  <td><i><%= time_ago_in_words(comment.created_at)  %> ago </i></td>
+    
 </li>
+</tr>
+</tbody>

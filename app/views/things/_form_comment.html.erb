@@ -1,13 +1,16 @@
 <%= form_for(@comment) do |f| %>
 
 	<%= f.hidden_field :thing_id %>
+  <div class="form-horizontal">
+  <div class="form-group">
+    <div class="col-lg-4">
+    	<%= f.text_area :content, placeholder: "Compose new comment...",  class: "form-control" %>
+    </div>
+    </div>
+  </div>
 
 
-	<div class="field">
-    <%= f.text_field :description, placeholder: "solution, response, ..." %>
-	</div>
-	<div class="field">
-    	<%= f.text_area :content, placeholder: "Compose new comment..." %>
-	</div>
-	<%= f.submit "Comment", class: "btn btn-primary" %>
+		<%= f.submit "Comment", class: "btn btn-primary" %>
+
+
 <% end %>

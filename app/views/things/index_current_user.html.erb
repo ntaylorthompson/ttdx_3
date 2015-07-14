@@ -1,13 +1,17 @@
 <h1>Your Things</h1>
 
-<h1><small>Created:</small></h1>
-<%= render 'index_current_user' %>
+<div class="row">
+	<div class="col-lg-6">
+		<h1><small>Created:</small></h1>
+		<%= render 'index_current_user' %>
+	</div>
 
 <%@things = @followed_things%>
-
 <% @followed = true %>
 
-<h1><small>Followed:</small></h1>
-<%= render 'index_current_user' %>
-
-<%= link_to 'New Thing', new_thing_path %>
+	<div class="col-lg-6">
+		<h1><small>Followed:</small></h1>
+		<%= render 'index_current_user' %>
+	</div>
+</div>
+<%= button_to 'New Thing', new_thing_path %>

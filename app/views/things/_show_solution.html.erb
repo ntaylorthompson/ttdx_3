@@ -3,12 +3,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>User:</th>
+        <th>Solution type:</th>
         <th>Possible solution:</th>
-        <th>Description:</th>
         <th>Problems with this solution:</th>
-
-        <th colspan="3"></th>
       </tr>
     </thead>
 
@@ -16,7 +13,6 @@
     <tbody>
 		<%for solution in @thing.solutions %>
         <tr>
-          <td><%= solution.thing.user.username %>   </td>
           <td><%= solution.kind %>     </td>
           <td><%= solution.description %>    </td>
           <td><%= solution.issues_description %>   </td>		  		  
