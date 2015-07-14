@@ -1,9 +1,9 @@
-<h1>Thing to:<small> </h1><h1><%= @thing.object_description %></small></h1>
+<h1>Thing to:<small>	<%= @thing.object_description %></small></h1>
 <br	>
 
 <p>
   <strong>By user:</strong>
-  <%= @thing.user.email %>
+  <%= @thing.user.username %>
 </p>
 
 <p>
@@ -12,13 +12,13 @@
 </p>
 
 <p>
-  <strong>Solution:</strong>
+  <strong>Solution idea:</strong>
   <%= @thing.solution_description %>
 </p>
 
 
 <br>
-<h3>Possible solutions:</h3>
+<h3>Solutions:</h3>
 
   <%= render 'show_solution' %>
 
@@ -33,9 +33,13 @@
 <%= link_to 'Edit', edit_thing_path(@thing) %> |
 <%= link_to 'Back', things_path %>
 
-<br>
+
+<hr>
+
+
 <%= render 'form_comment' %>	
 
-<ol class="microposts">
+<h1><small>Comment</small></h1>
+<ol>
   <%= render @comments %>
 </ol>

@@ -1,3 +1,4 @@
+<br>
 <%= form_for @thing do |f| %>
 
   <% if @thing.errors.any? %>
@@ -13,53 +14,82 @@
   <% end %>
 
 
+	
+<div class="row">	
+	<div class="col-lg-3">	
+		<%= f.label "I want a thing to:" %><br>
+	</div>
+	<div class="col-lg-8">		   
+		<%= f.text_area :object_description, placeholder: "do X.", class: "form-control" %>
+	</div>
+</div>	
+<br>
 
-  <div class="field">
-    <%= f.label "I want a thing to:" %><br>
-    <%= f.text_area :object_description %>
-  </div>
-  <div class="field">
-    <%= f.label "The problem I have:" %><br>
-    <%= f.text_area :problem_description %>
-  </div>
-  <div class="field">
-    <%= f.label "A possible solution:" %><br>
-    <%= f.text_area :solution_description %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :tag_list %>
-  </div>
-  <br>
-  
-  <%= f.submit 'Add solution', :name => "add_solution" %>  
-<table class="table table-striped">
-	<thead>
-    <tr>
-		<th>Existing solution:</th>
-        <th>Description:</th>
-        <th>Problems with this solution:</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+<div class="row">	
+	<div class="col-lg-3">	
+		<%= f.label "The problem I have:" %><br>
+	</div>
+	<div class="col-lg-8">		   
+		<%= f.text_area :problem_description, placeholder: "pain.", class: "form-control" %>
+	</div>
+</div>	
+<br>    
 
-	<tbody>
+<div class="row">	
+	<div class="col-lg-3">	
+		<%= f.label "A possible solution:" %><br>
+	</div>
+	<div class="col-lg-8">		   
+		<%= f.text_area :solution_description, placeholder: "joy.", class: "form-control" %>
+	</div>
+</div>	
+<br>
+
+<div class="row">	
+	<div class="col-lg-3">	
+		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+	</div>
+	<div class="col-lg-8">		   
+		<%= f.text_field :tag_list,placeholder: "X, joy, pain removal", class: "form-control", id: "formGroupInputSmall"%>
+	</div>
+</div>	
+<br>
+    
+<div class="row">
+	<div class="col-lg-3">	
+		<br>		
+		<b>"Existing solutions:"</b>
+		
+		<%= f.submit 'Add solution', :name => "add_solution" %>
+	</div>
+		
+	<div class="col-lg-8">
+	<table class="table table-striped">
+		<thead>
+	    <tr>
+			<th>Existing solution:</th>
+	        <th>Description:</th>
+	        <th>Problems with this solution:</th>
+	      </tr>
+	    </thead>
+
+		<tbody>
 	
 
-	<%= f.fields_for :solutions do |sol| %>
-		<tr>
-			<td>    <%= sol.text_field :kind %></td>
-		    <td>    <%= sol.text_area :description %></td>
-		    <td>    <%= sol.text_area :issues_description %></td>
-
-		</tr>
-	<%end%>
-</tbody>  
-  </table>
+			<%= f.fields_for :solutions do |sol| %>
+				<tr>
+					<td>    <%= sol.text_field :kind, placeholder: "link or name", class: "form-control" %></td>
+				    <td>    <%= sol.text_area :description, placeholder: "how it works.", class: "form-control" %></td>
+				    <td>    <%= sol.text_area :issues_description, placeholder: "its p	roblems.", class: "form-control" %></td>
+				</tr>
+			<%end%>
+		</tbody>  
+	</table>
+	</div>
   <div class="actions">
   </div>
+</div>
 
-  <%= f.submit %>
+  <%= f.submit "Create Thing", :class => 'btn btn-primary' %>
 
 <% end %>
