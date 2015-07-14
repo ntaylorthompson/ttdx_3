@@ -10,7 +10,13 @@ class ActivitiesController < ApplicationController
         ft_comment_ids << comment.id
       end
     end
-      
+  
+    #create an array of user things
+    user_things = []
+    for thing in current_user.things
+      user_things << thing.id
+    end 
+    
     #other (non-comment) changes to things you folow
     a = PublicActivity::Activity.where(trackable_type: "Thing", trackable_id: ft).where.not(owner_id: current_user.id) 
     
@@ -18,7 +24,7 @@ class ActivitiesController < ApplicationController
     b = PublicActivity::Activity.where(trackable_type: "Comment", trackable_id: ft_comment_ids).where.not(owner_id: current_user.id) 
     
     #other people follow your things     
-    c = PublicActivity::Activity.where(trackable_type: "User", parameters: ft)
+    c = PublicActivity::Activity.where(trackable_type: "User", relevant_obj_id: user_things).where.not(owner_id: current_user.id) 
 #    PublicActivity::Activity.where(parameters: ft)
 
     #a friend does something 

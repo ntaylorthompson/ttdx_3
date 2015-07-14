@@ -37,7 +37,7 @@ class ThingsController < ApplicationController
       unless current_user.followed_things.include? id_s
         current_user.update_attributes(followed_things: current_user.followed_things.push(id))
         #set target type to the object being followed
-        current_user.create_activity action: 'thing_followed', owner: current_user, parameters: {followed_id: id}
+        current_user.create_activity action: 'thing_followed', owner: current_user, relevant_obj_id: id
       end
     end
     current_user.save
