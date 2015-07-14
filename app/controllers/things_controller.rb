@@ -6,13 +6,11 @@ class ThingsController < ApplicationController
   # GET /things.json
   def index
     if params[:tag]
-      @things = Thing.tagged_with(params[:tag])
+      @things = Thing.tagged_with(params[:tag]).where.not(user: current_user)
     else
-      @things = Thing.all
+      @things = Thing.all.where.not(user: current_user)
     end
     @followed_things_ids = current_user.followed_things.map(&:to_i)
-
-    
   end
   
   def index_current_user
