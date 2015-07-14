@@ -53,8 +53,9 @@ Ttdx3::Application.routes.draw do
   get "current_user_things", to: "things#index_current_user", as: "current_user_things"
   
   
-  devise_for :users
-
+#  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
+  
   namespace :admin do
     root "base#index"
     resources :users
