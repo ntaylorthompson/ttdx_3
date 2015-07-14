@@ -13,7 +13,15 @@
 	<tbody>
 		<% @activities.each do |activity| %>
 			<tr>
-			<td>placeholder</td>
+
+			<%if activity.trackable_type == "Thing"%>
+				<td><%= link_to Thing.find(activity.trackable_id).object_description, Thing.find(activity.trackable_id) %>   </td>
+			<%elsif activity.trackable_type == "Comment"%>
+				<td><%= link_to Comment.find(activity.trackable_id).content, Thing.find(Comment.find(activity.trackable_id).thing_id)	%>   </td>		
+			<%else %>
+				<td>placeholder</td>
+			<%end%>	
+
 			<td><%= User.find(activity.owner_id).email %></td>
 			<td><%= activity.key %>   </td>
 			<td><%= time_ago_in_words(activity.created_at)  %>   ago</td>

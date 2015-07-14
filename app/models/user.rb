@@ -24,11 +24,20 @@
 #
 
 class User < ActiveRecord::Base
+  include PublicActivity::Common  
+
   #custom edits to model
   has_many :things
   has_many :comments  
   
+  #activities only track changes to _followed_things
+
+
+#  include PublicActivity::Model  
+#  tracked only: :followed_things, owner: ->(controller, model) { controller && controller.current_user }
   
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

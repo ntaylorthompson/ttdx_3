@@ -32,9 +32,12 @@ class ThingsController < ApplicationController
     current_user.followed_things_will_change!
     if current_user.followed_things.nil? 
       current_user.update_attribute(:followed_things, [id])
+      current_user.create_activity :thing_followed, owner: current_user
     else
       unless current_user.followed_things.include? id_s
         current_user.update_attributes(followed_things: current_user.followed_things.push(id))
+        #set target type to the object being followed
+        current_user.create_activity action: 'thing_followed', owner: current_user, parameters: {followed_id: id}
       end
     end
     current_user.save
@@ -47,6 +50,8 @@ class ThingsController < ApplicationController
     current_user.followed_things_will_change!
     current_user.followed_things.delete(id_s)
     current_user.save
+
+
     redirect_to(:back)    
   end
     
