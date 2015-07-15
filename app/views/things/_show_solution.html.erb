@@ -3,7 +3,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Solution type:</th>
+        <th>Link:</th>
+        <th>Type:</th>
         <th>Possible solution:</th>
         <th>Problems with this solution:</th>
       </tr>
@@ -13,6 +14,7 @@
     <tbody>
 		<%for solution in @thing.solutions %>
         <tr>
+          <td><%= solution.link %>     </td>
           <td><%= solution.kind %>     </td>
           <td><%= solution.description %>    </td>
           <td><%= solution.issues_description %>   </td>		  		  

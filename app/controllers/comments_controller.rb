@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-
+  before_filter :require_signed_in!
+  
   def create
     thing_id = params[:comment][:thing_id]
     @thing = Thing.find(thing_id)

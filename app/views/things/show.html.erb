@@ -1,11 +1,11 @@
 <div class="row">
-	<div class="col-lg-8">
+	<div class="col-lg-10">
 		<h1>Thing to:<small>	<%= @thing.object_description %></small></h1>
 	</div>
 	<% if @thing.user == current_user %>
-	<div class="col-lg-4 text-right">
+	<div class="col-lg-2 text-right">
 <br>
-		<%= button_to 'Edit thing', edit_thing_path(@thing), class: "btn btn-default" %>
+		<%= link_to 'Edit thing', edit_thing_path(@thing), class: "btn btn-default" %>
 	</div>
 	<%end%>
 </div>

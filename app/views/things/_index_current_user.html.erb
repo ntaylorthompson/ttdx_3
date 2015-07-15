@@ -5,11 +5,12 @@
 
       <th>Thing to:</th>
       <th>Tags:	</th>
-      <th>By:	</th>
-      <th>Problem:</th>
-      <th>Solution:	</th>
-
+	  <%unless @followed == false %>
+      	<th>By:	</th>
+	  <%end%>
       <th colspan="3"></th>
+
+
     </tr>
   </thead>
 
@@ -19,15 +20,18 @@
 
         <td><%= link_to thing.object_description, thing %></td>
 		<td><%= raw thing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
-        <td><%= thing.user.username %></td>
-        <td><%= thing.problem_description %></td>
-        <td><%= thing.solution_description %></td>
 
-
-
-		
-
+  	  <%if @followed == false %>
         <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
+  	  <%else%>
+        <td><%= thing.user.username %></td>
+		
+  	  <%end%>
+
+
+
+
+
 
 		<% if @followed == true %>
 			<td><%= link_to 'Unfollow', unfollow_path(thing) %></td>

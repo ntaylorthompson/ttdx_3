@@ -1,4 +1,5 @@
 class ThingsController < ApplicationController
+  before_filter :require_signed_in!
   before_action :set_thing, only: [:show, :edit, :update, :destroy]
   
   
@@ -76,27 +77,21 @@ class ThingsController < ApplicationController
   # POST /things.json
   def create
     @thing = current_user.things.build(thing_params)
-#    @thing.solutions.build(solution_params)
-#    @solutions = @thing.solutions
-        
+    
     if params[:add_solution]
       @thing = current_user.things.build(thing_params)
       @thing.solutions.build
       render :new
       return
     end
- #     new_sol = Solution.new
-  #    @thing.solutions.build
-   #   @solutions = @thing.solutions
-#    else
-#    respond_to do |format|
-      if @thing.save
-        flash[:notice] = "Successfully created thing."
-        redirect_to @thing and return
-      else
-        format.html { render :new }
-        format.json { render json: @thing.errors, status: :unprocessable_entity }
-      end
+    
+    if @thing.save
+      flash[:notice] = "Successfully created thing."
+      redirect_to @thing and return
+    else
+      format.html { render :new }
+      format.json { render json: @thing.errors, status: :unprocessable_entity }
+    end
  #     if @solution.save
   #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
    #     format.json { render :show, status: :created, location: @solution }
@@ -119,6 +114,7 @@ class ThingsController < ApplicationController
 
   # GET /things/1/edit  
   def edit
+    #refactor w/ udpate to separate method
     unless current_user.id == Thing.find(params[:id]).user_id
       flash[:alert] = "You can only edit your own things!"
       redirect_to(:back) and return 
@@ -129,8 +125,18 @@ class ThingsController < ApplicationController
   # PATCH/PUT /things/1
   # PATCH/PUT /things/1.json
   def update
+    #refactor w/ edit to separate method
+    unless current_user.id == Thing.find(params[:id]).user_id
+      flash[:alert] = "You can only edit your own things!"
+      redirect_to(:back) and return 
+    end
+
+
+
+    
     if params[:add_solution]
       @thing = Thing.find(params[:id])
+      @thing.update(thing_params)
       @thing.solutions.build
       render :edit
       return
@@ -150,7 +156,7 @@ class ThingsController < ApplicationController
   # DELETE /things/1
   # DELETE /things/1.json
   def destroy
-    require_admin! #FOR NOW, DON'T WANT PEOPLE TO DESTROY THINGS
+    before_filter :require_admin! #FOR NOW, DON'T WANT PEOPLE TO DESTROY THINGS
     @thing.destroy
     respond_to do |format|
       format.html { redirect_to things_url, notice: 'Thing was successfully destroyed.' }
@@ -166,11 +172,11 @@ class ThingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def thing_params
-      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list,  solutions_attributes: [:id, :kind, :description, :issues_description ])
+      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list,  solutions_attributes: [:id, :kind, :description, :issues_description, :link])
 #      params.require(:solution).permit(:kind, :description, :issues_description)
     end
-    def solution_params
-      params.require(:solution).permit(:id, :kind, :description, :issues_description)
-    end
+
+   
+      
 
   end

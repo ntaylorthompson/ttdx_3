@@ -1,5 +1,7 @@
 <div class="row">
+
 	<div class="col-sm-6 ">
+
 	<h1>Edit your profile</h1>
 
 <a><%= link_to "Sign out", destroy_user_session_path, data:{method: :delete}, :class => 'btn btn-default' %></a>
@@ -11,15 +13,6 @@
 	:html => { :method => :put, role: "form" }) do |f| %>
 
 	<%= devise_error_messages! %>
-
-    <div class="form-group">
-      <%= f.label :username %>
-      <div class="row">
-        <div class="col-sm-6">
-          <%= f.text_field :username, class: "form-control" %>
-        </div>
-      </div>
-    </div>
 	
 	<div class="form-group">
 	  <%= f.label :email %>
@@ -30,6 +23,15 @@
 	  </div>
 	</div>
 
+    <div class="form-group">
+      <%= f.label :username %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_field :username, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+	
 	<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
 	<div class="row">
 	  <div class="col-sm-6">
@@ -67,7 +69,7 @@
 
 	<div class="row">
 	  <div class="col-sm-6">
-	    <%= f.submit "Update", class: "btn btn-primary" %> - <%= link_to "Cancel", inside_path %>
+	    <%= f.submit "Update", class: "btn btn-primary" %> - <%= link_to "Cancel", new_thing_path %>
 	  </div>
 	</div>
 

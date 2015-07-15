@@ -16,73 +16,89 @@
 
 	
 <div class="row">	
-	<div class="col-lg-3">	
+	<div class="col-lg-2">	
 		<%= f.label "I want a thing to:" %><br>
 	</div>
-	<div class="col-lg-8">		   
+	<div class="col-lg-9">		   
 		<%= f.text_area :object_description, placeholder: "do X.", class: "form-control" %>
 	</div>
 </div>	
 <br>
 
 <div class="row">	
-	<div class="col-lg-3">	
+	<div class="col-lg-2">	
 		<%= f.label "The problem I have:" %><br>
 	</div>
-	<div class="col-lg-8">		   
+	<div class="col-lg-9">		   
 		<%= f.text_area :problem_description, placeholder: "pain.", class: "form-control" %>
 	</div>
 </div>	
 <br>    
 
 <div class="row">	
-	<div class="col-lg-3">	
+	<div class="col-lg-2">	
 		<%= f.label "A possible solution:" %><br>
 	</div>
-	<div class="col-lg-8">		   
+	<div class="col-lg-9">		   
 		<%= f.text_area :solution_description, placeholder: "joy.", class: "form-control" %>
 	</div>
 </div>	
 <br>
 
 <div class="row">	
-	<div class="col-lg-3">	
+	<div class="col-lg-2">	
 		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
 	</div>
-	<div class="col-lg-8">		   
+	<div class="col-lg-9">		   
 		<%= f.text_field :tag_list,placeholder: "X, joy, pain removal", class: "form-control", id: "formGroupInputSmall"%>
 	</div>
 </div>	
 <br>
     
 <div class="row">
-	<div class="col-lg-3">	
+
+	<div class="col-lg-2">	
 		<br>		
+				
 		<b>"Existing solutions:"</b>
 		<br><br>
 		<%= f.submit 'Add solution', :name => "add_solution", class: "btn btn-default"  %>
 	</div>
 		
-	<div class="col-lg-8">
+	<div class="col-lg-9">
 	<table class="table table-striped">
 		<thead>
 	    <tr>
-			<th>Existing solution:</th>
+	        <th>Link:</th>			
+			<th>Type:</th>
 	        <th>Description:</th>
 	        <th>Problems with this solution:</th>
 	      </tr>
 	    </thead>
 
-		<tbody>
-	
-
+		<tbody>	
+<small>
 			<%= f.fields_for :solutions do |sol| %>
 				<tr>
-					<td>    <%= sol.text_field :kind, placeholder: "link or name", class: "form-control" %></td>
+					<td>    <%= sol.text_field :link,  placeholder: 'http://www.example.com', class: "form-control"%></td>
+
+					<td>    <small>	
+							<%= sol.radio_button :kind, 'product'%> 
+							<%= label :type_product, 'product' %>
+							<br>
+							<%= sol.radio_button :kind, 'startup'%> 
+							<%= label :type_product, 'startup' %>
+							<br>
+							<%= sol.radio_button :kind, 'hack'%> 
+							<%= label :type_product, 'hack' %>												
+						</small>	
+					
+					</td>
 				    <td>    <%= sol.text_area :description, placeholder: "how it works.", class: "form-control" %></td>
 				    <td>    <%= sol.text_area :issues_description, placeholder: "its problems.", class: "form-control" %></td>
 				</tr>
 			<%end%>
+</small>
 		</tbody>  
 	</table>
 	</div>
@@ -90,6 +106,6 @@
   </div>
 </div>
 
-  <%= f.submit "Create Thing", :class => 'btn btn-primary' %>
+  <%= f.submit "Save Thing", :class => 'btn btn-primary' %>
 
 <% end %>

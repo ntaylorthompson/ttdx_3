@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   # Redirects on successful sign in
   def after_sign_in_path_for(resource)
-    inside_path
+    new_thing_path
   end
 
   # Auto-sign out locked users
@@ -53,6 +53,16 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :require_admin!
+
+  # Only permits signed_in users
+
+  def require_signed_in!
+    if !user_signed_in?
+      redirect_to new_user_registration_path
+      flash[:alert] = "You need to sign in or sign up before continuing."
+    end
+  end
+  helper_method :require_signed_in!
 
 
 end
