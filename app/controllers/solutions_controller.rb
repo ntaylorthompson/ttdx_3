@@ -1,5 +1,6 @@
 class SolutionsController < ApplicationController
   before_filter :require_signed_in!
+  before_filter :require_admin!, only: [:index, :destroy]
   before_action :set_solution, only: [:show, :edit, :update, :destroy]
 
   # GET /solutions

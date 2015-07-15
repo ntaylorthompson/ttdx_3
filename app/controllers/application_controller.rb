@@ -65,4 +65,13 @@ class ApplicationController < ActionController::Base
   helper_method :require_signed_in!
 
 
+  def require_owner!(object)
+    unless object.user == current_user
+      redirect_to :back
+      flash[:alert] = "You can only edit things that you own."
+    end
+  end
+
+  helper_method :require_owner!
+
 end
