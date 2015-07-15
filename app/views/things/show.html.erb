@@ -1,14 +1,17 @@
 <div class="row">
-	<div class="col-lg-10">
+	<div class="col-lg-12">
 		<h1>Thing to:<small>	<%= @thing.object_description %></small></h1>
-	</div>
+
+
 	<% if @thing.user == current_user %>
-	<div class="col-lg-2 text-right">
-<br>
+
 		<%= link_to 'Edit thing', edit_thing_path(@thing), class: "btn btn-default" %>
-	</div>
+	
 	<%end%>
+		</div>
+		
 </div>
+<br>
 <p>
   <strong>By user:</strong>
   <%= @thing.user.username %>
@@ -16,12 +19,12 @@
 
 <p>
   <strong>Problem:</strong>
-  <%= @thing.problem_description %>
+  <%= simple_format(@thing.problem_description) %>
 </p>
-
+<br>
 <p>
   <strong>Solution idea:</strong>
-  <%= @thing.solution_description %>
+  <%= simple_format(@thing.solution_description) %>
 </p>
 
 <p>

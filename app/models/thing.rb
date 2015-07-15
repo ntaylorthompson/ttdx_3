@@ -1,6 +1,6 @@
 class Thing < ActiveRecord::Base
   include PublicActivity::Model
-  validates :object_description, presence: true, length: { maximum: 150 }
+  validates :object_description, presence: true, length: { maximum: 200 }
   validates :tag_list, presence: true, length: { maximum: 100 }
   validates :solution_description, length: { maximum: 2000 }
   validates :problem_description, length: { maximum: 2000 }    
