@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "Comment created!"
       redirect_to @thing
     else
-      flash[:alert] = "Comment not created!"
+      flash[:alert] = "You can't post a blank comment.  "
       redirect_to @thing
     end
   end

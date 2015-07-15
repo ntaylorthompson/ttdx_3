@@ -1,7 +1,8 @@
 class Comment < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller.current_user }
-
+  validates :content, presence: true, length: { maximum: 2000 }
+  
   belongs_to :user
   belongs_to :thing  
   validates :user_id, presence: true

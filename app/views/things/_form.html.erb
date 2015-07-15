@@ -17,7 +17,7 @@
 	
 <div class="row">	
 	<div class="col-lg-2">	
-		<%= f.label "I want a thing to:" %><br>
+		<%= f.label "I want a thing to:" %><br><small><i>(max 150 characters)</i></small>
 	</div>
 	<div class="col-lg-9">		   
 		<%= f.text_area :object_description, placeholder: "do X.", class: "form-control" %>
@@ -47,7 +47,7 @@
 
 <div class="row">	
 	<div class="col-lg-2">	
-		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+		<%= f.label :tag_list, "Tags:" %><br /><small><i>(separated by commas)</i></small>
 	</div>
 	<div class="col-lg-9">		   
 		<%= f.text_field :tag_list,placeholder: "X, joy, pain removal", class: "form-control", id: "formGroupInputSmall"%>

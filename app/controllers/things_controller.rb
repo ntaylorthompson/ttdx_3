@@ -84,13 +84,17 @@ class ThingsController < ApplicationController
       render :new
       return
     end
-    
-    if @thing.save
-      flash[:notice] = "Successfully created thing."
-      redirect_to @thing and return
-    else
-      format.html { render :new }
-      format.json { render json: @thing.errors, status: :unprocessable_entity }
+    respond_to do |format|
+
+      if @thing.save
+        
+        format.html { redirect_to @thing, notice: 'Thing was successfully created.' }
+        format.json { render :show, status: :ok, location: @thing }
+        
+      else
+        format.html { render :new  }
+        format.json { render json: @thing.errors, status: :unprocessable_entity }
+      end
     end
  #     if @solution.save
   #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
