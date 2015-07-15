@@ -18,14 +18,20 @@
 
 <table class="table table-striped">
   <tr>
-    <th>User ID</th>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Things</th>
+    <th>Comments</th>
+    <th>Follows</th>
+    <th>Sign In Count</th>	
+    <th>Created At</th>
+    <th>Last Sign In</th>	
     <th>Admin</th>
     <th>Locked</th>
-    <th>Email</th>
-    <th>Sign In Count</th>
-    <th>Created At</th>
-    <th>Last Sign In</th>
-    <th>Last Sign In IP</th>
+
+
+
+
   </tr>
 
   <% @users.each do |user| %>
@@ -33,8 +39,9 @@
   <tr>
     <td><%= user.id %></td>
     <td><%= link_to user.email, admin_user_path(user) %></td>
-    <td><%= user.admin? ? "<b>yes</b>".html_safe : "no" %></td>
-    <td><%= user.locked? ? "<b>yes</b>".html_safe : "no" %></td>
+    <td><%= user.things.count %></td>
+    <td><%= user.comments.count %></td>
+    <td><%= user.followed_things.count %></td>	
     <td><%= user.sign_in_count %></td>
     <td><%= time_ago_in_words(user.created_at) %></td>
     <% unless user.last_sign_in_at.nil? %>
@@ -42,7 +49,8 @@
     <% else %>
     <td>never</td>
     <% end %>
-    <td><%= user.last_sign_in_ip %></td>
+    <td><%= user.admin? ? "<b>yes</b>".html_safe : "no" %></td>
+    <td><%= user.locked? ? "<b>yes</b>".html_safe : "no" %></td>
   </tr>
 
   <% end %>

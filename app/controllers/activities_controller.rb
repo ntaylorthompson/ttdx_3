@@ -52,13 +52,13 @@ class ActivitiesController < ApplicationController
 
     def activity_type (activity)
       if activity.key == 'thing.update'
-        "changed followed thing"
+        "changed a thing you follow"
       elsif activity.key == 'user.thing_followed'
         "followed your thing"
       elsif Comment.find(activity.trackable_id).thing.user == current_user
         "commented on your thing"        
       else 
-        "commented on followed thing"        
+        "commented on a thing you follow"        
       end
     end
     

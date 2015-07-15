@@ -3,8 +3,10 @@
 <div class="row">
   <div class="col-sm-4">
     <h3>Menu</h3>
-    <h4><%= link_to "Users", admin_users_path %> <small>- <%= "#{pluralize(@count, 'user')}" %></small></h4>
-    
+    <h4><%= link_to "Users", admin_users_path %> <small>- <%= "#{pluralize(@count_user, 'user')}" %>, <%= number_to_percentage(@pct_activated, precision: 0)%> activated  </small></h4>
+    <h4>Things <small>- <%= "#{pluralize(@count_thing, 'thing')}" %></small></h4>
+    <h4>Comments <small>- <%= "#{pluralize(@count_comment, 'comment')}" %></small></h4>
+    <h4>Follows <small>- <%= "#{pluralize(@count_follows, 'follows')}" %> </small></h4>		
     <hr/>
   </div>
 

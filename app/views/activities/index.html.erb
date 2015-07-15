@@ -2,31 +2,31 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
+			<th>Time:	</th>
 			<th>User:</th>
 			<th>Activity:	</th>
 			<th>Object:</th>
-
-			<th>Time:	</th>
-			<th colspan="3"></th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<% @activities.each do |activity| %>
 			<tr>
+			<td><i><%= time_ago_in_words(activity.created_at)  %>   ago</i></td>
 			<td><%= User.find(activity.owner_id).username %></td>
 			<td><%= activity_type(activity) %>   </td>
 			<%if activity.trackable_type == "Thing"%>
 				<td><%= link_to Thing.find(activity.trackable_id).object_description, Thing.find(activity.trackable_id) %>   </td>
 			<%elsif activity.trackable_type == "Comment"%>
 				<td><%= link_to Comment.find(activity.trackable_id).content, Thing.find(Comment.find(activity.trackable_id).thing_id)	%>   </td>		
+
 			<%else %>
-				<td>placeholder</td>
+				<td><%= link_to Comment.find(activity.relevant_obj_id).content, Thing.find(Comment.find(activity.relevant_obj_id).thing_id)	%> </td>
 			<%end%>	
 
 
 
-			<td><i><%= time_ago_in_words(activity.created_at)  %>   ago</i></td>
+
 			</tr>
 
 		<% end %>

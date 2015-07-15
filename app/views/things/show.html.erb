@@ -4,7 +4,8 @@
 	</div>
 	<% if @thing.user == current_user %>
 	<div class="col-lg-4 text-right">
-		<%= button_to 'Edit thing', edit_thing_path(@thing) %>
+<br>
+		<%= button_to 'Edit thing', edit_thing_path(@thing), class: "btn btn-default" %>
 	</div>
 	<%end%>
 </div>
