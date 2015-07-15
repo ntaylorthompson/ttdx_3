@@ -9,7 +9,7 @@ class ThingsController < ApplicationController
     if params[:tag]
       @things = Thing.tagged_with(params[:tag]).where.not(user: current_user)
     else
-      @things = Thing.all.where.not(user: current_user)
+      @things = Thing.all.where.not(user: current_user).search_and_order(params[:search], params[:page])
     end
     @followed_things_ids = current_user.followed_things.map(&:to_i)
   end

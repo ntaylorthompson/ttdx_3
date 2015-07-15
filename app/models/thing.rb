@@ -15,6 +15,18 @@ class Thing < ActiveRecord::Base
   default_scope -> { order(updated_at: :desc) }
 
   acts_as_taggable
+  
+  
+  
+  def self.search_and_order(search, page_number)
+    if search
+      where("object_description LIKE ?", "%#{search.downcase}%").order(updated_at: :asc).page page_number
+    else
+      order(updated_at: :asc).page page_number
+    end
+  end
+  
+  
 end
 
 

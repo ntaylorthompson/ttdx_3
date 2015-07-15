@@ -2,7 +2,26 @@
 	<h1> Things
   	<small>tagged '<%= params[:tag] %>' </small></h1>
 	<%else%>
-	<h1>All Things</h1>
-	
+
+
+  
+  
+	<h1>All Things</h1><br>
+	<div class="row">
+	<div class="col-lg-4 form-inline">
+		<%= form_tag things_path, method: 'get', html: {role: "form"} do %>
+			<p>
+			  <%= text_field_tag :search, params[:search], class: "form-control" %>
+			  <%= submit_tag "Search", :name => nil, class: "btn btn-sm btn-primary" %>
+			  <%= link_to "All", things_path, {class: "btn btn-sm btn-link"} %>
+			</p>
+		<% end %>
+	</div>
+	</div>
 <%end%>
 <%= render 'index_all' %>
+
+<div class="text-center">
+<%= page_entries_info @things %><br>
+  <%= paginate @things %>
+</div>

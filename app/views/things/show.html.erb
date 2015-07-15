@@ -49,7 +49,7 @@
 
 <%if @thing.comments.empty? == false%>
 	<h1><small>
-		<%="Comment".pluralize(@thing.comments.count)%>
+		<%= @thing.comments.count %>  <%= "Comment".pluralize(@thing.comments.count)%>
 	</small></h1>
 <%end%>
 
