@@ -88,7 +88,7 @@ class ThingsController < ApplicationController
 
       if @thing.save
         
-        format.html { redirect_to @thing, notice: 'Thing was successfully created.' }
+        format.html { render :new, notice: 'Thing was successfully created.' }
         format.json { render :show, status: :ok, location: @thing }
         
       else
