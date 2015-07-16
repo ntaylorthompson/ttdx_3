@@ -7,7 +7,7 @@ class ThingsController < ApplicationController
   # GET /things.json
   def index
     if params[:tag]
-      @things = Thing.tagged_with(params[:tag]).where.not(user: current_user)
+      @things = Thing.tagged_with(params[:tag]).where.not(user: current_user).page params[:page]
     else
       @things = Thing.all.where.not(user: current_user).search_and_order(params[:search], params[:page])
     end
