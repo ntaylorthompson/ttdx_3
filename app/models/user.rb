@@ -24,7 +24,8 @@
 #
 
 class User < ActiveRecord::Base
-  include PublicActivity::Common  
+  include PublicActivity::Common
+  validates_uniqueness_of :username
   validates :username, presence: true, length: { maximum: 30 }
   #custom edits to model
   has_many :things
