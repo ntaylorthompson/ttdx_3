@@ -7,5 +7,6 @@ class Comment < ActiveRecord::Base
   belongs_to :thing, touch: true  
   validates :user_id, presence: true
   validates :thing_id, presence: true  
+
   default_scope -> { order(updated_at: :desc) }
 end

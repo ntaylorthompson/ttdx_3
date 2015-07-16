@@ -16,13 +16,19 @@
 
         <td><%= link_to thing.object_description, thing %></td>
 		<td><%= raw thing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
-        <td><%= thing.user.username %></td>
 
-		
-		<% unless @followed_things_ids.include? thing.id %>
-        	<td><%= link_to 'Follow', follow_path(thing) %></td>
+		<% if thing.user == current_user %>
+			<td>you</td>
 		<%else %>
+			<td><%= thing.user.username %></td>
+		<% end%>		
+
+		<% if thing.user == current_user %>
+			<td></td>
+		<%elsif @followed_things_ids.include? thing.id %>
 			<td><%= link_to 'Unfollow', unfollow_path(thing) %></td>
+		<%else %>
+        	<td><%= link_to 'Follow', follow_path(thing) %></td>			
 		<%end%>
 		
 		

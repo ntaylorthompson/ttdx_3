@@ -4,6 +4,7 @@ class Thing < ActiveRecord::Base
   validates :tag_list, presence: true, length: { maximum: 100 }
   validates :solution_description, length: { maximum: 2000 }
   validates :problem_description, length: { maximum: 2000 }    
+
   tracked owner: ->(controller, model) { controller.current_user }
   
   has_many :solutions
