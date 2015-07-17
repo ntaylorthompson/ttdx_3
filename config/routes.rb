@@ -41,13 +41,12 @@ Ttdx3::Application.routes.draw do
   resources :things
   resources :comments
   resources :activities
-
   
   root "pages#home"
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
-  get "home_alt", to: "pages#home_alt", as: "home_alt"
-  
+  get "home_alt", to: "pages#home_alt"
+  get "signup_alt", to: "pages#signup_alt"
   
   get "follow", to: "things#follow", as: "follow"
   get "unfollow", to: "things#unfollow", as: "unfollow"
@@ -57,7 +56,8 @@ Ttdx3::Application.routes.draw do
   
 #  devise_for :users
   devise_for :users, controllers: { registrations: "users/registrations" }
-  
+
+    
   namespace :admin do
     root "base#index"
     resources :users

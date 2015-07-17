@@ -26,11 +26,18 @@
 class User < ActiveRecord::Base
   include PublicActivity::Common
   validates_uniqueness_of :username
-  validates :username, presence: true, length: { maximum: 30 }
   #custom edits to model
   has_many :things
   has_many :comments  
+
+  #SETS DEFAULT USERNAME TO EMAIL BEFORE '@' UPON SIGNUP
+  before_validation(on: :create) do
+    default_username = self.email.split("@")[0]
+    self.username = default_username
+  end
   
+  validates :username, length: { maximum: 30 }
+      
   #activities only track changes to _followed_things
 
 
@@ -42,7 +49,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  :recoverable, :rememberable, :trackable, :validatable#, :confirmable
 
   # Pagination
   paginates_per 100
@@ -77,4 +84,8 @@ class User < ActiveRecord::Base
   def self.users_count
     where("admin = ? AND locked = ?",false,false).count
   end
+  
+  private 
+  
+  
 end

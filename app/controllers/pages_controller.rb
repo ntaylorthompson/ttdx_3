@@ -8,8 +8,26 @@ class PagesController < ApplicationController
   end
   
   def home_alt
-
     @submission = Thing.new
   end
+
+  def signup_alt
+    @user = User.new
+  end
+
+  private
+
+  def sign_up_params
+    params.require(:user).permit!
+  end
+
+  def account_update_params
+    params.require(:user).permit!
+  end
+
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end  
+  
   
 end

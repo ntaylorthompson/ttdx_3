@@ -52,6 +52,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     edit_user_registration_path
   end  
 
+
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
