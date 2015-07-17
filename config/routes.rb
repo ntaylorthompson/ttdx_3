@@ -46,7 +46,9 @@ Ttdx3::Application.routes.draw do
   root "pages#home"
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
-
+  get "home_alt", to: "pages#home_alt", as: "home_alt"
+  
+  
   get "follow", to: "things#follow", as: "follow"
   get "unfollow", to: "things#unfollow", as: "unfollow"
     

@@ -18,7 +18,7 @@ class ActivitiesController < ApplicationController
     for thing in current_user.things
       user_things << thing.id
     end 
-
+    
     #create an array of user_thing comments
     ut_comment_ids = []
     for thing in current_user.things

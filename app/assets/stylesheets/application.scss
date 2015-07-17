@@ -3,6 +3,13 @@
  *
  *= require_self
  */
+
+//CSS JUST FOR NEW HOME PAGE DESIGN
+::-webkit-input-placeholder {
+ font-size: 20px;
+ color: #6b6b6b;
+}
+
 @import "railsbricks_custom";
 
 /* centered columns styles */
@@ -17,4 +24,5 @@
     /* inline-block space fix */
     margin-right:-4px;
 }
+
 

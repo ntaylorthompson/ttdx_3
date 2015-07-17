@@ -1,7 +1,4 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!, only: [
-    :inside
-  ]
 
   def home
     redirect_to new_thing_path if current_user.present?
@@ -10,5 +7,9 @@ class PagesController < ApplicationController
   def inside
   end
   
+  def home_alt
+
+    @submission = Thing.new
+  end
   
 end

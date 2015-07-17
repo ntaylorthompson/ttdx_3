@@ -217,7 +217,11 @@ $input-color: $text-color; // Text color for <input>s
 $input-bg: #ffffff; // <input> background color
 $input-border: #cccccc; // <input> border color
 $input-border-radius: $border-radius-base; // <input> border radius
-$input-color-placeholder: #bbbbbb; // Placeholder text color
+
+
+//$input-color-placeholder: #bbbbbb; // Placeholder text color
+
+
 // -> Input states
 $input-border-focus: #66afe9; // Border color for inputs on focus
 $input-bg-disabled: #dddddd; // <input disabled> background color
