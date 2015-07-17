@@ -1,5 +1,5 @@
 class ThingsController < ApplicationController
-  before_filter :require_signed_in!
+#  before_filter :require_signed_in!, unless: :user_not_required?
   before_action :set_thing, only: [:show, :edit, :update, :destroy]
   
   
@@ -76,38 +76,50 @@ class ThingsController < ApplicationController
   # POST /things
   # POST /things.json
   def create
-    @thing = current_user.things.build(thing_params)
-    
-    if params[:add_solution]
+    if params[:signup]
+      @thing = Thing.new(thing_params)
+      respond_to do |format|
+        if @thing.save
+          format.html { redirect_to new_user_registration_path, notice: ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe }
+          format.json { render :show, status: :created, location: @thing }
+        else
+          format.html { render :new  }
+          format.json { render json: @thing.errors, status: :unprocessable_entity }
+        end
+      end  
+    elsif
       @thing = current_user.things.build(thing_params)
-      @thing.solutions.build
-      render :new
-      return
-    end
-    respond_to do |format|
-
-      if @thing.save
-        
-        format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
-        format.json { render :show, status: :created, location: @thing }
-        
-      else
-        format.html { render :new  }
-        format.json { render json: @thing.errors, status: :unprocessable_entity }
+    
+      if params[:add_solution]
+        @thing = current_user.things.build(thing_params)
+        @thing.solutions.build
+        render :new
+        return
       end
-    end
- #     if @solution.save
-  #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
-   #     format.json { render :show, status: :created, location: @solution }
-   #   else
-    #    format.html { render :new }
-     #   format.json { render json: @solution.errors, status: :unprocessable_entity }
-     # end
-     # => @thing.save
-#     @thing.save    
- #    render :edit
+      respond_to do |format|
 
+        if @thing.save
+        
+          format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
+          format.json { render :show, status: :created, location: @thing }
+        
+        else
+          format.html { render :new  }
+          format.json { render json: @thing.errors, status: :unprocessable_entity }
+        end
+      end
+   #     if @solution.save
+    #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
+     #     format.json { render :show, status: :created, location: @solution }
+     #   else
+      #    format.html { render :new }
+       #   format.json { render json: @solution.errors, status: :unprocessable_entity }
+       # end
+       # => @thing.save
+  #     @thing.save    
+   #    render :edit
    end
+  end
   #end
 
 
@@ -176,7 +188,7 @@ class ThingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def thing_params
-      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list,  solutions_attributes: [:id, :kind, :description, :issues_description, :link])
+      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list, :user_not_required, solutions_attributes: [:id, :kind, :description, :issues_description, :link])
 #      params.require(:solution).permit(:kind, :description, :issues_description)
     end
 

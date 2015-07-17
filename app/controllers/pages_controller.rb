@@ -8,7 +8,10 @@ class PagesController < ApplicationController
   end
   
   def home_alt
-    @submission = Thing.new
+    @thing = Thing.new
+    @thing.user_not_required == true 
+    
+    
   end
 
   def signup_alt
