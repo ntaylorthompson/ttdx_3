@@ -1,8 +1,19 @@
-<div class="fluid-container">
-  <div class="col-sm-4"></div>
-  <div class="col-sm-6">
+<div class="text-center">
+
+
   <br>
-    <h1>Sign up</h1>
+  <br>
+	<!-- DEFAULT SIGNUP
+	<h1>Sign up</h1> -->
+
+	<h1>Sign up to</h1><h1><small>
+		get email alerts on wishlist progress
+		<br>search archive of people's needs
+		<br></small>
+	</h1>
+
+  <div class="col-sm-4 col-centered">
+
 
     <%= form_for(resource, :as => resource_name,
     :url => registration_path(resource_name),
@@ -10,12 +21,12 @@
 
     <%= devise_error_messages! %>
 
+<br>
     <div class="form-group">
-      <%= f.label :email %>
       <div class="row">
-        <div class="col-sm-6">
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
+
+          <%= f.email_field :email, placeholder: "email", class: "form-control input-lg" %>
+
       </div>
     </div>
 
@@ -30,10 +41,9 @@
 	
     <div class="form-group">
       <div class="row">
-        <div class="col-sm-6">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
+		  
+          <%= f.password_field :password, placeholder: "password", class: "form-control input-lg" %>
+
       </div>
     </div>
 
@@ -45,16 +55,17 @@
         </div>
       </div>
     </div> -->
+	    </div>
+	    <div class="row">
+			<div class ="col-xs-2 col-centered">
+	        <%= f.submit "Sign up >", class: "btn btn-primary btn-lg" %>
+			<br>
+	
+	    <% end %>
+	<br>
 
-    <div class="row">
-      <div class="col-sm-6">
-        <%= f.submit "Sign up", class: "btn btn-primary" %>
-      </div>
-    </div>
-    <% end %>
-<br>
+	    <!-- <%= render "devise/shared/links" %> -->
 
-    <%= render "devise/shared/links" %>
-
+	  </div>
   </div>
 </div>

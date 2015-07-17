@@ -30,8 +30,16 @@
       </div>
 
     </div>
+	
+	<% if Rails.env.development? %>
+		<br><br><br><br>
+		<%= params %>
+	<% end %>
   </div>
 	<br>
+	
+
+
   <%= render 'layouts/footer' %>
 
 </body>
