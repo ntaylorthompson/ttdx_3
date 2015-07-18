@@ -2,17 +2,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
+  def home_alt
+    @user = User.new 
+#    @user.things.build
+#    @thing.user_not_required == true   
+  end
+  
+  
   # GET /resource/sign_up
   # def new
   #   super
   # end
 
   # POST /resource
-  # def create
-  #   super do |resource|
-       #BackgroundWorker.trigger(resource)
-   #  end
-   #end
+  def create
+    if params[:signup] == "post your need to startups >"
+      user = User.new
+      params.merge!(user: user)
+    end
+    
+    super do |resource|
+       BackgroundWorker.trigger(resource)
+    end
+   end
 
   # GET /resource/edit
   # def edit
@@ -41,8 +53,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit!
+    params.require(:user).permit(things: [:object_description, :tag_list])
   end
+
+  # def landing_page_params
+  #   params.require(thing:).permit(:object_description, :tag_list)
+  # end
 
   def account_update_params
     params.require(:user).permit!

@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
     default_username = self.email.split("@")[0]
     self.username = default_username
   end
+
+  
   
   validates :username, length: { maximum: 30 }
       

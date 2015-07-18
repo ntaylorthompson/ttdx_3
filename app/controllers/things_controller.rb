@@ -78,15 +78,17 @@ class ThingsController < ApplicationController
   def create
     if params[:signup]
       @thing = Thing.new(thing_params)
-      respond_to do |format|
+    #  session[:new_signup_thing_id] = @thing.id
+    #  respond_to do |format|
         if @thing.save
-          format.html { redirect_to new_user_registration_path, notice: ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe }
-          format.json { render :show, status: :created, location: @thing }
-        else
-          format.html { render :new  }
-          format.json { render json: @thing.errors, status: :unprocessable_entity }
+          flash[:notice]= ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe
+          redirect_to controller: "users/registrations", action: "new", new_signup_thing_id: @thing.id 
+        #  format.json { render :show, status: :created, location: @thing }
+#        else
+    #      format.html { render :new  }
+   #       format.json { render json: @thing.errors, status: :unprocessable_entity }
         end
-      end  
+     # end  
     elsif
       @thing = current_user.things.build(thing_params)
     
@@ -188,7 +190,7 @@ class ThingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def thing_params
-      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list, :user_not_required, solutions_attributes: [:id, :kind, :description, :issues_description, :link])
+      params.require(:thing).permit(:user_id, :object_description, :problem_description, :solution_description, :tag_list, :user_not_required,  solutions_attributes: [:id, :kind, :description, :issues_description, :link])
 #      params.require(:solution).permit(:kind, :description, :issues_description)
     end
 

@@ -8,8 +8,11 @@ class PagesController < ApplicationController
   end
   
   def home_alt
-    @thing = Thing.new
-    @thing.user_not_required == true 
+    @user = User.new 
+#    @user.things.build
+    
+
+#    @thing.user_not_required == true 
     
     
   end
@@ -17,6 +20,7 @@ class PagesController < ApplicationController
   def signup_alt
     @user = User.new
   end
+
 
   private
 

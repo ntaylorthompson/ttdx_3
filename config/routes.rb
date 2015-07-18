@@ -45,7 +45,7 @@ Ttdx3::Application.routes.draw do
   root "pages#home"
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
-  get "home_alt", to: "pages#home_alt"
+
   get "signup_alt", to: "pages#signup_alt"
   
   get "follow", to: "things#follow", as: "follow"
@@ -57,6 +57,11 @@ Ttdx3::Application.routes.draw do
 #  devise_for :users
   devise_for :users, controllers: { registrations: "users/registrations" }
 
+  as :user do
+      get "home_alt", to: "users/registrations#home_alt"
+  end
+    
+   
     
   namespace :admin do
     root "base#index"

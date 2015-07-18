@@ -36,18 +36,24 @@
 <div class="row">
 	<h1>I wish there were a thing to:</h1>
 	<br>
-	<%= form_for(@thing) do |f| %>
+
+	
+    <%= form_for(resource, :as => resource_name,
+    :url => registration_path(resource_name),
+    :html => { :role => "form" }) do |f| %>
+		
+		<%= fields_for :things do |t| %>
 			<div class="col-xs-6 col-centered">
-				<%= f.text_area :object_description, placeholder: "\r\n(1) wishlist products that don't exist yet, and email me when someone creates them.\r\n\r\n(2) catalyze companies to solve my problems.\r\n\r\n(3) reach early adopters for my startup, so I solve the right problem.", class: "form-control", rows: 13 %>
+				<%= t.text_area :object_description, placeholder: "\r\n(1) wishlist products that don't exist yet, and email me when someone creates them.\r\n\r\n(2) catalyze companies to solve my problems.\r\n\r\n(3) reach early adopters for my startup, so I solve the right problem.", class: "form-control", rows: 13 %>
 <br>
 
 
 
 
 
-			<%= f.text_field :tag_list, placeholder: "tags, to make your need searchable", class: "form-control input-lg", rows: 2 %>
+			<%= t.text_field :tag_list, placeholder: "tags, to make your need searchable", class: "form-control input-lg", rows: 2 %>
 			</div>
-
+		<%end%>
 </div>
 <br>
 
