@@ -8,12 +8,11 @@ class PagesController < ApplicationController
   end
   
   def home_alt
-    @user = User.new 
+    @thing = Thing.new
 #    @user.things.build
     
 
 #    @thing.user_not_required == true 
-    
     
   end
 

@@ -19,8 +19,10 @@
 
 		<% if thing.user == current_user %>
 			<td>you</td>
+		<%elsif thing.user == nil %>
+			<td><i>anonymous</i></td>
 		<%else %>
-			<td><%= thing.user.username %></td>
+			<td><%= thing.user.username %></td>	
 		<% end%>		
 
 		<% if thing.user == current_user %>

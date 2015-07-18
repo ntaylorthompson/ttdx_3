@@ -9,6 +9,15 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
 
+#COULDN'T OVERRIDE DEFAULT METHOD, SO CREATED AN ALTERNATIVE ONE 
+  # def soft_user!
+  #     current_user.present?
+  # end
+  
+  def current_user
+     super || User.where(soft_token: soft_token).first_or_initialize
+  end
+ 
 
   # Devise permitted params
   def configure_permitted_parameters
@@ -75,5 +84,13 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :require_owner!
+
+
+  private
+
+  def soft_token
+    session[:user_token] ||= SecureRandom.hex(8)
+  end
+
 
 end

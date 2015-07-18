@@ -1,9 +1,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-# before_filter :configure_sign_up_params, only: [:create]
+ before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
-
+  
+  
   def home_alt
-    @user = User.new 
+    @thing = Thing.new
 #    @user.things.build
 #    @thing.user_not_required == true   
   end
@@ -14,17 +15,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+ 
   # POST /resource
-  def create
-    if params[:signup] == "post your need to startups >"
-      user = User.new
-      params.merge!(user: user)
-    end
-    
-    super do |resource|
-       BackgroundWorker.trigger(resource)
-    end
-   end
+  # BOTCHED ATTEMPT TO CUSTOMIZE DEVISE REGISTRATIONS#CREATE CONTROLLER
+  # def create
+  #   if params[:signup] == "post your need to startups >"
+  #     user = User.new
+  #   end
+  #
+  #   super do |resource|
+  #      BackgroundWorker.trigger(resource)
+  #   end
+  #  end
 
   # GET /resource/edit
   # def edit
@@ -50,10 +52,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  private
+  protected
+
+  def configure_sign_up_params
+    devise_parameter_sanitizer.for(:sign_up) << :soft_token
+  end
 
   def sign_up_params
-    params.require(:user).permit(things: [:object_description, :tag_list])
+    params.require(:user).permit!
   end
 
   # def landing_page_params

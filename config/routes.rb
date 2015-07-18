@@ -41,6 +41,7 @@ Ttdx3::Application.routes.draw do
   resources :things
   resources :comments
   resources :activities
+  resources :registration_steps
   
   root "pages#home"
   get "home", to: "pages#home", as: "home"
@@ -57,9 +58,9 @@ Ttdx3::Application.routes.draw do
 #  devise_for :users
   devise_for :users, controllers: { registrations: "users/registrations" }
 
-  as :user do
-      get "home_alt", to: "users/registrations#home_alt"
-  end
+  
+  get "home_alt", to: "pages#home_alt"
+  
     
    
     

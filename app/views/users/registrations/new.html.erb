@@ -20,7 +20,9 @@
     :html => { :role => "form" }) do |f| %>
 
     <%= devise_error_messages! %>
+		
 
+		<%= f.hidden_field :soft_token, value: current_user.soft_token %>
 <br>
     <div class="form-group">
       <div class="row">

@@ -32,6 +32,7 @@ gem 'railsbricks'
 
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
 gem 'bootstrap-sass', '3.3.5.1'
+gem 'wicked'
 
 group :development, :test do
   gem 'byebug', '5.0.0'

@@ -29,14 +29,16 @@ class User < ActiveRecord::Base
   #custom edits to model
   has_many :things
   has_many :comments  
-
+  
   #SETS DEFAULT USERNAME TO EMAIL BEFORE '@' UPON SIGNUP
   before_validation(on: :create) do
     default_username = self.email.split("@")[0]
     self.username = default_username
   end
 
-  
+  def soft_user?
+    self.email.empty?
+  end
   
   validates :username, length: { maximum: 30 }
       
