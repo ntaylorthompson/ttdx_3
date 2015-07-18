@@ -1,7 +1,7 @@
 
 		  
 
-<% if !user_signed_in? %>
+<% if current_user.id.nil? %>
 
         <%= render 'layouts/navigation_signed_out' %>
 

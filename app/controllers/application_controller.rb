@@ -24,8 +24,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
       :email,
       :password,
-      :password_confirmation,
-      :new_signup_thing_id
+      :password_confirmation
       )
     }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
@@ -67,13 +66,13 @@ class ApplicationController < ActionController::Base
 
   # Only permits signed_in users
 
-  def require_signed_in!
-    if !user_signed_in?
-      redirect_to new_user_registration_path
-      flash[:alert] = "You need to sign in or sign up before continuing."
-    end
-  end
-  helper_method :require_signed_in!
+  # def require_signed_in!
+  #   if !user_signed_in?
+  #     redirect_to new_user_registration_path
+  #     flash[:alert] = "You need to sign in or sign up before continuing."
+  #   end
+  # end
+  # helper_method :require_signed_in!
 
 
   def require_owner!(object)

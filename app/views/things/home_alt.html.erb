@@ -39,28 +39,17 @@
 
 	
     <%= form_for @thing do |f| %>
-		
-	
 			<div class="col-xs-6 col-centered">
 				<%= f.text_area :object_description, placeholder: "\r\n(1) wishlist products that don't exist yet, and email me when someone creates them.\r\n\r\n(2) catalyze companies to solve my problems.\r\n\r\n(3) reach early adopters for my startup, so I solve the right problem.", class: "form-control", rows: 13 %>
 <br>
-
-
-
-
-
 			<%= f.text_field :tag_list, placeholder: "tags, to make your need searchable", class: "form-control input-lg", rows: 2 %>
 			</div>
-	
 </div>
 <br>
-
-
 <br>
-
 <div class=row>
 	<div class="col-xs-6 col-centered">
-	<a><%= f.submit "post what you wish a product would do >", :name => "signup", :class => 'btn btn-primary btn-lg btn-block' %></a>
+	<%= f.submit "post what you wish a product would do >", :name => "signup", :class => 'btn btn-primary btn-lg btn-block' %>
 	<!-- <br>
 	<a><%= link_to "learn more >", new_user_registration_path, :class => 'btn btn-default btn-lg btn-block' %></a> -->
 	</div>

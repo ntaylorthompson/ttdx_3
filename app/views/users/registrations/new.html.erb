@@ -1,20 +1,20 @@
 <div class="text-center">
 
 
-  <br>
+  <br> 
   <br>
 	<!-- DEFAULT SIGNUP
 	<h1>Sign up</h1> -->
 
-	<h1>Sign up</h1><h1><small>
-		get alerts on wishlist progress
-		<br>search archive of needs
-		<br></small>
-	</h1>
+
+
+
 
   <div class="col-sm-4 col-centered">
-
-
+<div class=text-center>
+	<h1>Sign Up</h1>
+	<b><h2><small>wishlist future products, get updates when people build them</small></h1></b>
+</div>
     <%= form_for(resource, :as => resource_name,
     :url => registration_path(resource_name),
     :html => { :role => "form" }) do |f| %>
@@ -49,6 +49,13 @@
       </div>
     </div>
 
+	<div class ="form-group">
+    <div class="row">
+        <%= f.submit "Sign up >", class: "btn btn-primary btn-lg btn-block" %>
+  	  </div>
+    </div>
+	    </div>
+
     <!-- <div class="form-group">
       <div class="row">
         <div class="col-sm-6">
@@ -57,17 +64,13 @@
         </div>
       </div>
     </div> -->
-	    </div>
-	    <div class="row">
-			<div class ="col-xs-2 col-centered">
-	        <%= f.submit "Sign up >", class: "btn btn-primary btn-lg" %>
-			<br>
+
 	
-	    <% end %>
+
 	<br>
+
+	    <% end %>
 
 	    <!-- <%= render "devise/shared/links" %> -->
 
-	  </div>
-  </div>
 </div>

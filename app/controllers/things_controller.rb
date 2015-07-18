@@ -1,7 +1,12 @@
 class ThingsController < ApplicationController
 #  before_filter :require_signed_in!, unless: :user_not_required?
   before_action :set_thing, only: [:show, :edit, :update, :destroy]
-  
+
+  def home_alt
+    @thing = Thing.new
+#    @user.things.build
+#    @thing.user_not_required == true     
+  end  
   
   # GET /things
   # GET /things.json
@@ -76,26 +81,17 @@ class ThingsController < ApplicationController
   # POST /things
   # POST /things.json
   def create
-    @user = current_user
-    if @user.soft_user?
-      
+    if current_user.soft_user?
+      @thing = Thing.new(thing_params)   
+      @thing.solutions.build     
       if params[:signup]
-        @thing = Thing.new(thing_params)
-        @thing.soft_token = @user.soft_token
-      #  session[:new_signup_thing_id] = @thing.id
-      #  respond_to do |format|
-          if @thing.save
-            flash[:notice]= ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe
-            redirect_to controller: "users/registrations", action: "new"
-          #  format.json { render :show, status: :created, location: @thing }
-  #        else
-      #      format.html { render :new  }
-     #       format.json { render json: @thing.errors, status: :unprocessable_entity }
-          end
-       # end  
-      elsif
-        @thing = current_user.things.build(thing_params)
-        @thing.soft_token = @user.soft_token        
+        @thing.soft_token = current_user.soft_token
+        if @thing.save
+          flash[:notice]= ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe
+          redirect_to controller: "users/registrations", action: "new"
+        end
+      else
+        @thing.soft_token = current_user.soft_token        
         if params[:add_solution]
           @thing = current_user.things.build(thing_params)
           @thing.solutions.build
@@ -103,55 +99,54 @@ class ThingsController < ApplicationController
           return
         end
         respond_to do |format|
-
           if @thing.save
-        
             format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
             format.json { render :show, status: :created, location: @thing }
-        
           else
             format.html { render :new  }
             format.json { render json: @thing.errors, status: :unprocessable_entity }
           end
         end
+      end
 
-#IF CURRENT USER IS REGULAR USER CREATE THIS WAY        
-      else
-        if params[:signup]
-          @thing = Thing.new(thing_params)
-        #  session[:new_signup_thing_id] = @thing.id
-        #  respond_to do |format|
-            if @thing.save
-              flash[:notice]= ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe
-              redirect_to controller: "users/registrations", action: "new"
-            #  format.json { render :show, status: :created, location: @thing }
-    #        else
-        #      format.html { render :new  }
-       #       format.json { render json: @thing.errors, status: :unprocessable_entity }
-            end
-         # end  
-        elsif
-          @thing = current_user.things.build(thing_params)
-          if params[:add_solution]
-            @thing = current_user.things.build(thing_params)
-            @thing.solutions.build
-            render :new
-            return
+# IF USER IS NOT SOFT USER
+    else
+      @thing = current_user.things.build(thing_params)  
+      if params[:signup] or params[:action] == "home_alt"
+        @thing.solutions.build
+        # if @thing.save
+        #   flash[:notice]= ['Your need was created.','Fill out more details here!'].join("<br/><br/>").html_safe
+        #   render :edit and return
+        # else
+        #   redirect_to :back, alert: "Thing not created, go go 'new thing' view!"
+        # end
+        respond_to do |format|
+          if @thing.save
+            format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
+            format.json { render :show, status: :created, location: @thing }
+          else
+            format.html { render :home_alt }
+            format.json { render json: @thing.errors, status: :unprocessable_entity }
           end
-          respond_to do |format|
-
-            if @thing.save
-        
-              format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
-              format.json { render :show, status: :created, location: @thing }
-        
-            else
-              format.html { render :new  }
-              format.json { render json: @thing.errors, status: :unprocessable_entity }
-            end
+        end
+      else
+        if params[:add_solution]
+          @thing.solutions.build
+          render :new and return
+        end
+        @thing.solutions.build
+        respond_to do |format|
+          if @thing.save
+            format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
+            format.json { render :show, status: :created, location: @thing }
+          else
+            format.html { render :new  }
+            format.json { render json: @thing.errors, status: :unprocessable_entity }
           end
         end
       end
+    end
+  end
    #     if @solution.save
     #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
      #     format.json { render :show, status: :created, location: @solution }
@@ -162,8 +157,6 @@ class ThingsController < ApplicationController
        # => @thing.save
   #     @thing.save    
    #    render :edit
-   end
-  end
   #end
 
 

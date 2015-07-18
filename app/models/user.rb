@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def soft_user?
-    self.email.empty?
+    self.id.nil?
   end
   
   validates :username, length: { maximum: 30 }
