@@ -105,7 +105,7 @@ class ThingsController < ApplicationController
         end
         respond_to do |format|
           if @thing.save
-            format.html { redirect_to new_thing_path, notice: 'Thing was successfully created.' }
+            format.html { redirect_to new_user_registration_path, notice: 'Thing was successfully created.' }
             format.json { render :show, status: :created, location: @thing }
           else
             format.html { render :new  }

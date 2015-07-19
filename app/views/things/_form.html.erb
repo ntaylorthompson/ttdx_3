@@ -50,7 +50,7 @@
 		<%= f.label :tag_list, "Tags:" %><br /><small><i>(separated by commas)</i></small>
 	</div>
 	<div class="col-lg-9">		   
-		<%= f.text_field :tag_list, placeholder: "X, joy, pain removal", class: "form-control", id: "formGroupInputSmall"%>
+		<%= f.text_field :tag_list, value: @thing.tag_list.to_s, placeholder: "X, joy, pain removal", class: "form-control", id: "formGroupInputSmall"%>
 	</div>
 </div>	
 <br>
