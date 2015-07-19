@@ -62,6 +62,11 @@ class ThingsController < ApplicationController
 
   #NEEDSTO BE FIXED 
   def show
+    if @thing.user.nil?
+      u = User.new
+      u.username = "anonymous"
+      @thing.user = u 
+    end
     @comments = @thing.comments
 
     #ugh: needed to create a new comment without adding new comment to the list at bottom of thing view
