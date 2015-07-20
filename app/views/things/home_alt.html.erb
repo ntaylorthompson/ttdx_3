@@ -40,10 +40,10 @@
 	
     <%= form_for @thing do |f| %>
 			<div class="col-xs-6 col-centered">
-				<%= f.text_area :object_description, placeholder: "\r\n(1) wishlist products that don't exist yet, and email me when someone creates them.\r\n\r\n(2) catalyze companies to solve my problems, by posting that information for free on the internet.\r\n\r\n", class: "form-control", rows: 13 %>
+				<%= f.text_area :object_description, placeholder: "\r\n\r\n\r\nDescribe a problem you have, and we'll email you when someone solves it.", class: "form-control", rows: 13 %>
 <br>
-			<%= f.text_field :tag_list, placeholder: "tags, to make your need searchable", class: "form-control input-lg", rows: 2 %>
-			</div>
+			<!-- <%= f.text_field :tag_list, placeholder: "tags, to make your need searchable", class: "form-control input-lg", rows: 2 %>
+			</div> -->
 </div>
 <br>
 <br>
