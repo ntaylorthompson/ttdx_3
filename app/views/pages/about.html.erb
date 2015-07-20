@@ -18,18 +18,20 @@
 
 <%= render 'pages/how_it_works.erb' %>
 
-	<br>
-	<p>– – –</p>
-	<div class="col-xs-6 col-centered">
+	<!-- <br>
+	<p>– – –</p> -->
+	<!-- <div class="col-xs-6 col-centered">
 		<div class="text-center">
 	<h3>our mission</h3>
 	<p>we want to connect people who have problems with people who can fix them. <%= mail_to "thing.to.do.x@gmail.com", "email us"%> to learn more.</p>
 </div>
-</div>
+</div> -->
 
 <br>
 <br>
-<a><%= link_to "get started >", new_user_registration_path, :class => 'btn btn-primary btn-lg' %></a>
+<div class="col-xs-3 col-centered">
+<a><%= link_to "get started >", new_user_registration_path, :class => 'btn btn-primary btn-lg btn-block' %></a>
+</div>
 <br>
 <br>
 
