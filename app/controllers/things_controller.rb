@@ -86,36 +86,35 @@ class ThingsController < ApplicationController
   # POST /things
   # POST /things.json
   def create
-    if current_user.soft_user?
-      @thing = Thing.new(thing_params)   
-      @thing.solutions.build     
-      if params[:signup]
-        @thing.soft_token = current_user.soft_token
-        if @thing.save
-          flash[:notice]= ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe
-          redirect_to controller: "users/registrations", action: "new"
-        end
-      else
-        @thing.soft_token = current_user.soft_token        
-        if params[:add_solution]
-          @thing = current_user.things.build(thing_params)
-          @thing.solutions.build
-          render :new
-          return
-        end
-        respond_to do |format|
-          if @thing.save
-            format.html { redirect_to new_user_registration_path, notice: 'Thing was successfully created.' }
-            format.json { render :show, status: :created, location: @thing }
-          else
-            format.html { render :new  }
-            format.json { render json: @thing.errors, status: :unprocessable_entity }
-          end
-        end
-      end
+    # if current_user.soft_user?
+    #   @thing = Thing.new(thing_params)
+    #   @thing.solutions.build
+    #   if params[:signup]
+    #     @thing.soft_token = current_user.soft_token
+    #     if @thing.save
+    #       flash[:notice]= ['Your need was created.','Sign up to get alerts on solutions!'].join("<br/><br/>").html_safe
+    #       redirect_to controller: "users/registrations", action: "new"
+    #     end
+    #   else
+    #     @thing.soft_token = current_user.soft_token
+    #     if params[:add_solution]
+    #       @thing = current_user.things.build(thing_params)
+    #       @thing.solutions.build
+    #       render :new
+    #       return
+    #     end
+    #     respond_to do |format|
+    #       if @thing.save
+    #         format.html { redirect_to new_user_registration_path, notice: 'Thing was successfully created.' }
+    #         format.json { render :show, status: :created, location: @thing }
+    #       else
+    #         format.html { render :new  }
+    #         format.json { render json: @thing.errors, status: :unprocessable_entity }
+    #       end
+    #     end
+    #   end
 
 # IF USER IS NOT SOFT USER
-    else
       @thing = current_user.things.build(thing_params)  
       if params[:signup] or params[:action] == "home_alt"
         @thing.solutions.build
@@ -150,7 +149,6 @@ class ThingsController < ApplicationController
           end
         end
       end
-    end
   end
    #     if @solution.save
     #      format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
