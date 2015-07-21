@@ -177,6 +177,7 @@ class ThingsController < ApplicationController
       flash[:alert] = "You can only edit your own things!"
       redirect_to(:back) and return 
     end
+    @thing.solutions.build if @thing.solutions.empty?
     
   end
 

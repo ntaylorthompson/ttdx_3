@@ -10,32 +10,39 @@ class Users::RegistrationsController < Devise::RegistrationsController
 #   end
 #
   
-  def merge_things
-    things = Thing.where(soft_token: current_user.soft_token)
-    things.map do |thing|
-      thing.user = current_user
-      thing.user_id = current_user.id
-      thing.save!
-    end
-  end
+  # def merge_things
+  #   things = Thing.where(soft_token: current_user.soft_token)
+  #   things.map do |thing|
+  #     thing.user = current_user
+  #     thing.user_id = current_user.id
+  #     thing.save!
+  #   end
+  # end
   
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    build_resource({})
+    self.resource.things.build
+    respond_with self.resource
+  end
 
  
   # POST /resource
   # BOTCHED ATTEMPT TO CUSTOMIZE DEVISE REGISTRATIONS#CREATE CONTROLLER
-  # def create
-  #   if params[:signup] == "post your need to startups >"
-  #     user = User.new
-  #   end
-  #
-  #   super do |resource|
-  #      BackgroundWorker.trigger(resource)
-  #   end
-  #  end
+
+
+   # def create
+   #   if params[:signup] == "post your need to startups >"
+   #     user = User.new
+   #   end
+   #
+   #   super do |resource|
+   #      BackgroundWorker.trigger(resource)
+   #   end
+   #  end
+   def create
+     super
+   end
 
   # GET /resource/edit
   # def edit
@@ -68,7 +75,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit!
+    params.require(:user).permit(:username, :email, :password, things_attributes: [:id, :object_description])
   end
 
   # def landing_page_params
@@ -86,8 +93,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    merge_things
-    super(resource)
+    # merge_things
+    # super(resource)
+    flash[:notice] = "Add more detail to your need, to help us search the future!"
+    edit_thing_path(current_user.things.first)
+    
   end
 
   # The path used after sign up for inactive accounts.

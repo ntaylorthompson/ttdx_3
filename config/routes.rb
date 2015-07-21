@@ -34,8 +34,7 @@
 #
 
 Ttdx3::Application.routes.draw do
-  root "things#home_alt"
- # get "home_alt" => "things#home_alt"
+  root "pages#about"
   
   get 'activities/index'
 
@@ -47,7 +46,7 @@ Ttdx3::Application.routes.draw do
   resources :registration_steps
   
 
-  get "about", to: "pages#about"
+  get "home_alt", to: "things#home_alt"
     
 
   

@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   #custom edits to model
   has_many :things
   has_many :comments  
+  accepts_nested_attributes_for :things
   
   #SETS DEFAULT USERNAME TO EMAIL BEFORE '@' UPON SIGNUP
   before_validation(on: :create) do
@@ -36,8 +37,14 @@ class User < ActiveRecord::Base
     self.username = default_username
   end
 
-  def soft_user?
-    self.id.nil?
+  # def soft_user?
+  #   self.id.nil?
+  # end
+  #
+  
+  #AUTOMATICALLY BUILDS THING IF IT IS BLANK
+  def things
+    super || build_things
   end
   
   validates :username, length: { maximum: 30 }
