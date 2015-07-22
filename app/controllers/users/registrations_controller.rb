@@ -95,7 +95,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     # merge_things
     # super(resource)
-    flash[:notice] = "Add more detail to your need, to help us search the future!"
+    flash[:notice] = "Add more detail to your need, to help us search the future for a solution!"
     edit_thing_path(current_user.things.first)
     
   end
